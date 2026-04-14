@@ -45,7 +45,7 @@ npx serve .
 
 | 項目 | 場所 |
 |------|------|
-| フリップブック HTML | `/tmp/claude/fuklet/{slug}-{timestamp}.html` |
+| フリップブック HTML | `outputs/{slug}-{timestamp}.html` |
 | カタログ | `books.json`（プロジェクトルート） |
 | 本棚 | `bookshelf.html` |
 

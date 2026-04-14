@@ -138,10 +138,10 @@ Read `skill/template.html` and populate it with chapter data.
 </div>
 ```
 
-**Output path:** `/tmp/claude/fuklet/{slug}-{timestamp}.html`
+**Output path:** `outputs/{slug}-{timestamp}.html`
 
 ```bash
-OUTPUT_DIR="/tmp/claude/fuklet"
+OUTPUT_DIR="$(cd "$(dirname "$0")/.." && pwd)/outputs"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 OUTPUT_FILE="$OUTPUT_DIR/$SLUG-$TIMESTAMP.html"
 mkdir -p "$OUTPUT_DIR"
@@ -170,7 +170,7 @@ open "$OUTPUT_FILE"
   "title": "{TITLE}",
   "date": "{YYYY-MM-DD}",
   "day": "{weekday}",
-  "file": "/tmp/claude/fuklet/{slug}-{timestamp}.html",
+  "file": "outputs/{slug}-{timestamp}.html",
   "source": "{original source path}",
   "sessions": {chapter_count},
   "chapters": ["Chapter 1 Title", "Chapter 2 Title", ...],

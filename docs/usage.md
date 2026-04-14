@@ -49,7 +49,7 @@ When you pass a file path, fuklet:
 The flipbook is saved to:
 
 ```
-/tmp/claude/fuklet/{slug}-{timestamp}.html
+outputs/{slug}-{timestamp}.html
 ```
 
 Where:

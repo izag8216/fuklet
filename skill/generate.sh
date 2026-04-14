@@ -4,7 +4,7 @@
 # Usage: ./generate.sh <path>
 #   <path> can be a file or folder
 #
-# Output: /tmp/claude/fuklet/input_{timestamp}.txt
+# Output: outputs/input_{timestamp}.txt
 #
 # Exit codes:
 #   0 - Success
@@ -32,7 +32,7 @@ if [ ! -e "$TARGET" ]; then
   exit 1
 fi
 
-OUTPUT_DIR="/tmp/claude/fuklet"
+OUTPUT_DIR="$(cd "$(dirname "$0")/.." && pwd)/outputs"
 TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
 OUTPUT_FILE="$OUTPUT_DIR/input_${TIMESTAMP}.txt"
 

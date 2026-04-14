@@ -23,7 +23,7 @@ fuklet is a [Claude Code](https://claude.ai/code) skill that generates interacti
 /fuklet /path/to/file.md
 ```
 
-This generates a flipbook at `/tmp/claude/fuklet/{slug}-{timestamp}.html` and opens it in your browser.
+This generates a flipbook at `outputs/{slug}-{timestamp}.html` and opens it in your browser.
 
 ## Usage
 
@@ -55,7 +55,7 @@ npx serve .
 
 | Item | Location |
 |------|----------|
-| Flipbook HTML | `/tmp/claude/fuklet/{slug}-{timestamp}.html` |
+| Flipbook HTML | `outputs/{slug}-{timestamp}.html` |
 | Catalog | `books.json` (in project root) |
 | Bookshelf | `bookshelf.html` |
 

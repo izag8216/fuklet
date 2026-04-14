@@ -10,7 +10,7 @@ Thumbs.db
 .idea/
 
 # Generated flipbooks (runtime output)
-/tmp/
+outputs/
 
 # Node (if any tooling added later)
 node_modules/

@@ -40,7 +40,7 @@ jobs:
       - name: Run generate.sh
         run: bash skill/generate.sh /tmp/fuklet-test
       - name: Check output exists
-        run: test -f /tmp/claude/fuklet/input_*.txt
+        run: test -f outputs/input_*.txt
 
   html-check:
     runs-on: ubuntu-latest
