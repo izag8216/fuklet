@@ -44,7 +44,7 @@ SLUG="$(basename "$TARGET" | sed 's/\.[^.]*$//' | tr '[:upper:]' '[:lower:]' | s
 if [ -f "$TARGET" ]; then
   # ── Single file mode ──
   FILE_EXT="${TARGET##*.}"
-  FILE_SIZE=$(wc -c < "$TARGET" 2>/dev/null || echo "0")
+  : # file size intentionally unused in output
 
   # Skip binary files (rough check)
   if file "$TARGET" 2>/dev/null | grep -qi "binary\|executable\|image\|audio\|video\|archive\|compressed"; then
@@ -129,7 +129,7 @@ elif [ -d "$TARGET" ]; then
     for f in "${FILES[@]}"; do
       COUNT=$((COUNT + 1))
       if [ "$COUNT" -le 20 ]; then
-        echo "$(basename "$f")"
+        basename "$f"
       elif [ "$COUNT" -eq 21 ]; then
         echo "[Merged: $(basename "$f")"
       else
