@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ShellCheck
+        run: sudo apt-get install -y shellcheck
+      - name: Lint shell scripts
+        run: shellcheck skill/generate.sh
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install jq
+        run: sudo apt-get install -y jq
+      - name: Validate books.json
+        run: jq empty books.json
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, validate]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create test fixtures
+        run: |
+          mkdir -p /tmp/fuklet-test
+          echo "# Test Chapter 1" > /tmp/fuklet-test/chapter1.md
+          echo "This is test content for chapter 1." >> /tmp/fuklet-test/chapter1.md
+          echo "# Test Chapter 2" > /tmp/fuklet-test/chapter2.md
+          echo "This is test content for chapter 2." >> /tmp/fuklet-test/chapter2.md
+      - name: Run generate.sh
+        run: bash skill/generate.sh /tmp/fuklet-test
+      - name: Check output exists
+        run: test -f /tmp/claude/fuklet/input_*.txt
+
+  html-check:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate template.html
+        run: |
+          if [ -f skill/template.html ]; then
+            grep -q '<!DOCTYPE html>' skill/template.html
+            grep -q '</html>' skill/template.html
+            echo "template.html is well-formed"
+          else
+            echo "template.html not found (may not be generated yet)"
+          fi
